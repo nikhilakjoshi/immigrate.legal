@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "shadcn": {
+      "url": "https://www.shadcn.io/api/mcp"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
