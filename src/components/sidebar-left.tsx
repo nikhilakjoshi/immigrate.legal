@@ -1,262 +1,200 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
-  Blocks,
+  BarChart3,
+  Briefcase,
   Calendar,
   Command,
+  FileText,
+  FolderOpen,
   Home,
-  Inbox,
   MessageCircleQuestion,
-  Search,
   Settings2,
-  Sparkles,
-  Trash2,
-} from "lucide-react"
+  Users,
+} from "lucide-react";
 
-import { NavFavorites } from "@/components/nav-favorites"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavWorkspaces } from "@/components/nav-workspaces"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavFavorites } from "@/components/nav-favorites";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavWorkspaces } from "@/components/nav-workspaces";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-// This is sample data.
+// Legal firm data
 const data = {
   teams: [
     {
-      name: "Acme Inc",
+      name: "Immigration Law Firm",
       logo: Command,
-      plan: "Enterprise",
+      plan: "Professional",
     },
     {
-      name: "Acme Corp.",
+      name: "Personal Practice",
       logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      plan: "Solo",
     },
   ],
   navMain: [
     {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
-    {
-      title: "Ask AI",
-      url: "#",
-      icon: Sparkles,
-    },
-    {
-      title: "Home",
-      url: "#",
+      title: "Dashboard",
+      url: "/dashboard",
       icon: Home,
       isActive: true,
     },
     {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
-      badge: "10",
+      title: "Cases",
+      url: "/cases",
+      icon: Briefcase,
+      badge: "12",
+    },
+    {
+      title: "Clients",
+      url: "/clients",
+      icon: Users,
+    },
+    {
+      title: "Documents",
+      url: "/documents",
+      icon: FileText,
     },
   ],
   navSecondary: [
     {
       title: "Calendar",
-      url: "#",
+      url: "/calendar",
       icon: Calendar,
     },
     {
+      title: "Templates",
+      url: "/templates",
+      icon: FolderOpen,
+    },
+    {
+      title: "Reports",
+      url: "/reports",
+      icon: BarChart3,
+    },
+    {
       title: "Settings",
-      url: "#",
+      url: "/settings",
       icon: Settings2,
     },
     {
-      title: "Templates",
-      url: "#",
-      icon: Blocks,
-    },
-    {
-      title: "Trash",
-      url: "#",
-      icon: Trash2,
-    },
-    {
       title: "Help",
-      url: "#",
+      url: "/help",
       icon: MessageCircleQuestion,
     },
   ],
   favorites: [
     {
-      name: "Project Management & Task Tracking",
-      url: "#",
-      emoji: "📊",
+      name: "High Priority Cases",
+      url: "/cases?priority=high",
+      emoji: "�",
     },
     {
-      name: "Family Recipe Collection & Meal Planning",
-      url: "#",
-      emoji: "🍳",
+      name: "EB1A Applications",
+      url: "/cases?template=eb1a",
+      emoji: "🏆",
     },
     {
-      name: "Fitness Tracker & Workout Routines",
-      url: "#",
-      emoji: "💪",
+      name: "H1B Renewals",
+      url: "/cases?template=h1b",
+      emoji: "💼",
     },
     {
-      name: "Book Notes & Reading List",
-      url: "#",
-      emoji: "📚",
+      name: "New Client Onboarding",
+      url: "/clients?status=new",
+      emoji: "👋",
     },
     {
-      name: "Sustainable Gardening Tips & Plant Care",
-      url: "#",
-      emoji: "🌱",
-    },
-    {
-      name: "Language Learning Progress & Resources",
-      url: "#",
-      emoji: "🗣️",
-    },
-    {
-      name: "Home Renovation Ideas & Budget Tracker",
-      url: "#",
-      emoji: "🏠",
-    },
-    {
-      name: "Personal Finance & Investment Portfolio",
-      url: "#",
-      emoji: "💰",
-    },
-    {
-      name: "Movie & TV Show Watchlist with Reviews",
-      url: "#",
-      emoji: "🎬",
-    },
-    {
-      name: "Daily Habit Tracker & Goal Setting",
-      url: "#",
-      emoji: "✅",
+      name: "Pending Document Review",
+      url: "/documents?status=pending",
+      emoji: "📋",
     },
   ],
   workspaces: [
     {
-      name: "Personal Life Management",
-      emoji: "🏠",
+      name: "Active Cases",
+      emoji: "📁",
       pages: [
         {
-          name: "Daily Journal & Reflection",
-          url: "#",
-          emoji: "📔",
+          name: "Immigration Petitions",
+          url: "/cases?category=immigration",
+          emoji: "�",
         },
         {
-          name: "Health & Wellness Tracker",
-          url: "#",
-          emoji: "🍏",
+          name: "Work Visas",
+          url: "/cases?category=work",
+          emoji: "💼",
         },
         {
-          name: "Personal Growth & Learning Goals",
-          url: "#",
-          emoji: "🌟",
+          name: "Family Visas",
+          url: "/cases?category=family",
+          emoji: "👨‍👩‍👧‍👦",
         },
       ],
     },
     {
-      name: "Professional Development",
-      emoji: "💼",
+      name: "Case Templates",
+      emoji: "�",
       pages: [
         {
-          name: "Career Objectives & Milestones",
-          url: "#",
-          emoji: "🎯",
+          name: "EB1A - Extraordinary Ability",
+          url: "/templates/eb1a",
+          emoji: "⭐",
         },
         {
-          name: "Skill Acquisition & Training Log",
-          url: "#",
-          emoji: "🧠",
+          name: "NIW - National Interest Waiver",
+          url: "/templates/niw",
+          emoji: "🇺🇸",
         },
         {
-          name: "Networking Contacts & Events",
-          url: "#",
-          emoji: "🤝",
+          name: "H1B - Specialty Occupation",
+          url: "/templates/h1b",
+          emoji: "💻",
+        },
+        {
+          name: "L1 - Intracompany Transfer",
+          url: "/templates/l1",
+          emoji: "🏢",
+        },
+        {
+          name: "O1 - Extraordinary Achievement",
+          url: "/templates/o1",
+          emoji: "�",
         },
       ],
     },
     {
-      name: "Creative Projects",
-      emoji: "🎨",
+      name: "Client Management",
+      emoji: "👥",
       pages: [
         {
-          name: "Writing Ideas & Story Outlines",
-          url: "#",
-          emoji: "✍️",
+          name: "Individual Clients",
+          url: "/clients?type=individual",
+          emoji: "�",
         },
         {
-          name: "Art & Design Portfolio",
-          url: "#",
-          emoji: "🖼️",
+          name: "Corporate Clients",
+          url: "/clients?type=corporate",
+          emoji: "🏢",
         },
         {
-          name: "Music Composition & Practice Log",
-          url: "#",
-          emoji: "🎵",
-        },
-      ],
-    },
-    {
-      name: "Home Management",
-      emoji: "🏡",
-      pages: [
-        {
-          name: "Household Budget & Expense Tracking",
-          url: "#",
-          emoji: "💰",
-        },
-        {
-          name: "Home Maintenance Schedule & Tasks",
-          url: "#",
-          emoji: "🔧",
-        },
-        {
-          name: "Family Calendar & Event Planning",
-          url: "#",
-          emoji: "📅",
-        },
-      ],
-    },
-    {
-      name: "Travel & Adventure",
-      emoji: "🧳",
-      pages: [
-        {
-          name: "Trip Planning & Itineraries",
-          url: "#",
-          emoji: "🗺️",
-        },
-        {
-          name: "Travel Bucket List & Inspiration",
-          url: "#",
-          emoji: "🌎",
-        },
-        {
-          name: "Travel Journal & Photo Gallery",
-          url: "#",
-          emoji: "📸",
+          name: "Client Communications",
+          url: "/communications",
+          emoji: "�",
         },
       ],
     },
   ],
-}
+};
 
 export function SidebarLeft({
   ...props
@@ -274,5 +212,5 @@ export function SidebarLeft({
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
